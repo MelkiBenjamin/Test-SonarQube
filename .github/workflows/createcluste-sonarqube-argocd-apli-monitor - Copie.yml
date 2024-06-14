@@ -12,30 +12,30 @@ jobs:
                 
       - name: installer sonarqube 
         run: |
-          curl https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip --output sonarqube-9.9.5.90363.zip
+          curl https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.5.1.90531.zip --output sonarqube-9.9.5.90363.zip
 
       - name: ls
         run: ls
 
       - name: unzip sonarqube
         run: | 
-          unzip sonarqube-9.9.5.90363.zip
-      
+          unzip sonarqube-10.5.1.90531.zip
+
       - name: ls
         run: ls
 
       - name: ls
-        run: ls sonarqube-9.9.5.90363
+        run: ls sonarqube-10.5.1.90531.zip
 
       - name: ls
-        run: ls sonarqube-9.9.5.90363/bin
+        run: ls sonarqube-10.5.1.90531.zip/bin
 
       - name: ls
-        run: ls sonarqube-9.9.5.90363/bin/linux-x86-64
+        run: ls sonarqube-10.5.1.90531.zip/bin/linux-x86-64
 
       - name: sonarqube start
         run: |
-          sonarqube-9.9.5.90363/bin/linux-x86-64/sonar.sh console
+          sonarqube-10.5.1.90531.zip/bin/linux-x86-64/sonar.sh console
           sleep 30
 
       - name: download cli sonarqube 
