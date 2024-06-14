@@ -12,9 +12,8 @@ jobs:
                 
       - name: installer sonarqube 
         run: |
-          cd /opt/sonarqube
           curl https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip --output sonarqube-9.9.5.90363.zip
-          /opt/sonarqube/bin/<OS>/sonar.sh console
+          /bin/linux/sonar.sh console
           sleep 30
 
 #      - name: ls
