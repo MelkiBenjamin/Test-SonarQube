@@ -24,9 +24,17 @@ jobs:
       - name: ls
         run: ls
 
+      - name: ls
+        run: ls sonarqube-9.9.5.90363
+
+      - name: ls
+        run: ls sonarqube-9.9.5.90363/bin
+
+      - name: ls
+        run: ls sonarqube-9.9.5.90363/bin/linux-x86-64
+
       - name: sonarqube start
         run: |
-          cd /
           /sonarqube-9.9.5.90363/bin/linux-x86-64/sonar.sh console
           sleep 30
 
