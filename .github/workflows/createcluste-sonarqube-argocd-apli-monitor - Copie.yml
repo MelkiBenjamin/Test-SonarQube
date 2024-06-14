@@ -9,41 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-                
-      - name: installer sonarqube 
-        run: |
-          curl https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.5.1.90531.zip --output sonarqube-10.5.1.90531.zip
-
-      - name: ls
-        run: ls
-
-      - name: unzip sonarqube
-        run: | 
-          unzip sonarqube-10.5.1.90531.zip
-
-      - name: ls
-        run: ls
-
-      - name: ls
-        run: ls sonarqube-10.5.1.90531
-
-      - name: ls
-        run: ls sonarqube-10.5.1.90531/bin
-
-      - name: ls
-        run: ls sonarqube-10.5.1.90531/bin/linux-x86-64
-
-      - name: sonarqube start
-        run: |
-          sonarqube-10.5.1.90531/bin/linux-x86-64/sonar.sh console
-          sleep 30
-
-      - name: download cli sonarqube 
-        run: |
-          curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output sonar-scanner-cli-5.0.1.3006-linux.zip
-        
-      - name: unzip cli sonarqube
-        run: unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+         
+      - name: sonar
+        run: docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest 
 
 #      - name: sonarqube connexion
 #        run: kubectl port-forward svc/sonarqube-sonarqube -n sonarqube --address 0.0.0.0 9000 &
