@@ -21,6 +21,12 @@ jobs:
       - name: unzip sonarqube
         run: | 
           unzip sonarqube-9.9.5.90363.zip
+      
+      - name: ls
+        run: ls
+
+      - name: sonarqube start
+        run: |  
           /bin/linux-x86-64/sonar.sh console
           sleep 30
 
