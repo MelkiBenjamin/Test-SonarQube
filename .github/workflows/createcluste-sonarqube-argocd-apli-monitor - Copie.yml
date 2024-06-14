@@ -25,17 +25,17 @@ jobs:
         run: ls
 
       - name: ls
-        run: ls sonarqube-10.5.1.90531.zip
+        run: ls sonarqube-10.5.1.90531
 
       - name: ls
-        run: ls sonarqube-10.5.1.90531.zip/bin
+        run: ls sonarqube-10.5.1.90531/bin
 
       - name: ls
-        run: ls sonarqube-10.5.1.90531.zip/bin/linux-x86-64
+        run: ls sonarqube-10.5.1.90531/bin/linux-x86-64
 
       - name: sonarqube start
         run: |
-          sonarqube-10.5.1.90531.zip/bin/linux-x86-64/sonar.sh console
+          sonarqube-10.5.1.90531/bin/linux-x86-64/sonar.sh console
           sleep 30
 
       - name: download cli sonarqube 
