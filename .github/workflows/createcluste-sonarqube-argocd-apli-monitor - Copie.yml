@@ -42,6 +42,9 @@ jobs:
         run: |
           sonarqube-10.5.1.90531/bin/linux-x86-64/sonar.sh console &
 
+      - name: sleep
+        run: sleep 30
+
       - name: download cli sonarqube 
         run: |
           curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output sonar-scanner-cli-5.0.1.3006-linux.zip
