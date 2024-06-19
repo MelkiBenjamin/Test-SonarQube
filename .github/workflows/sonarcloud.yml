@@ -54,7 +54,7 @@ jobs:
           # Additional arguments for the SonarScanner CLI
           args:
             # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
-            # mandatory
+            # mandatory 
             -Dsonar.projectKey=MelkiBenjamin_test-sonarqube
             -Dsonar.organization=melkibenjamin
             -Dsonar.verbose=true 
