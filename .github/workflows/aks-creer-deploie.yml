@@ -24,8 +24,8 @@ jobs:
         echo '{"spec": {"type": "LoadBalancer"}}' > patch.json
         kubectl patch svc argocd-server -n argocd --type merge --patch "$(cat patch.json)"
 
-#    - name: sleep 90s
-#      run: sleep 90s
+    - name: sleep 90s
+      run: sleep 90s
 
     - name: decrie svc argocd-server
       run: kubectl describe svc -n argocd argocd-server
