@@ -94,7 +94,7 @@ jobs:
     - name: affiche l'url du service
       run: |
         kubectl get service
-        minikube service evershop --url
+#        minikube service evershop --url
 
   monitoring:
     permissions:
@@ -162,7 +162,7 @@ jobs:
             helm repo add sonarqube https://SonarSource.github.io/helm-chart-sonarqube
             helm repo update
             kubectl create namespace sonarqube
-            helm upgrade --install -n sonarqube sonarqube sonarqube/sonarqube -f values-sonarqube.yaml
+            helm upgrade --install -n sonarqube sonarqube sonarqube/sonarqube 
   
         - name: sonarqube verfication svc
           run: kubectl get pod -n sonarqube
