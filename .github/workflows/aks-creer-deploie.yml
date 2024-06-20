@@ -85,7 +85,10 @@ jobs:
         sleep 120s  
         
     - name: minikube service
-      run: minikube service -all 
+      run: kubectl get svc
+
+    - name: affiche pod
+      run: kubectl get pods
       
     - name: affiche l'url du service
       run: |
