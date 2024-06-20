@@ -81,9 +81,10 @@ jobs:
       run: |
         kubectl config set-context --current --namespace=argocd
         argocd login --core
-        argocd app create ecommerce --repo https://github.com/MelkiBenjamin/deploiement-apli-kubernetes-argocd --path ecommerce --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy automated --auto-prune
+        argocd app create ecommerce --repo https://github.com/MelkiBenjamin/deploiement-apli-kubernetes-argocd --path evershop --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy automated --auto-prune
         sleep 120s  
-        
+# modifier le path du repo pour mettre en ecommerce
+
     - name: minikube service
       run: kubectl get svc
 
