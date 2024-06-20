@@ -144,3 +144,61 @@ jobs:
             # Adds more detail to both client and server-side analysis logs, activating DEBUG mode for the scanner, and adding client-side environment variables and system properties to the server-side log of analysis report processing.
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
+
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+        - name: demarer minikube
+          run: minikube start --driver=docker
+        - uses: Azure/setup-kubectl@v4.0.0      
+          id: install
+                  
+        - name: install helm
+          uses: Azure/setup-helm@v4
+          id: install-helm
+  
+        - name: installer sonarqube avec helm
+          run: |
+            helm repo add sonarqube https://SonarSource.github.io/helm-chart-sonarqube
+            helm repo update
+            kubectl create namespace sonarqube
+            helm upgrade --install -n sonarqube sonarqube sonarqube/sonarqube -f values-sonarqube.yaml
+  
+        - name: sonarqube verfication svc
+          run: kubectl get pod -n sonarqube
+    
+  #      - name: loadbalancing
+  #        run: |
+  #          echo '{"spec": {"type": "LoadBalancer"}}' > patch.json
+  #          kubectl patch svc sonarqube-sonarqube --type merge --patch "$(cat patch.json)" -n sonarqube
+    
+        - name: sonarqube attendre
+          run: sleep 60
+    
+        - name: sonarqube verfication
+          run: kubectl get svc -n sonarqube
+  
+        - name: download cli sonarqube 
+          run: |
+            curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output sonar-scanner-cli-5.0.1.3006-linux.zip
+          
+        - name: unzip cli sonarqube
+          run: unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+  
+        - name: sonarqube attendre
+          run: sleep 240
+  
+        - name: sonarqube verfication
+          run: kubectl get svc -n sonarqube
+  
+        - name: sonarqube connexion
+          run: kubectl port-forward svc/sonarqube-sonarqube -n sonarqube --address 0.0.0.0 9000 &
+           
+        - name: sonarqube token
+          run: |
+            curl -u admin:${{ secrets.ARGOCD }} -X POST "http://127.0.0.1:9000/api/user_tokens/generate" -d "name=mon_token"
+  
+        - name: lance sonarqube
+          run: |
+            sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner -Dsonar.projectKey=sonarqube -Dsonar.sources=. -Dsonar.host.url=${{ secrets.SONAR_IP }} -Dsonar.login=${{ secrets.SONAR_LOGIN }} -Dsonar.password=${{ secrets.SONAR_PASSWORD }} -X
+  
