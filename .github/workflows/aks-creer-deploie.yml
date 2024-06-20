@@ -1,6 +1,6 @@
 name: configuration et deploie aplication sur aks
 on:
-  #  push:
+    push:
     workflow_dispatch:
 
 jobs:
