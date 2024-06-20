@@ -85,12 +85,9 @@ jobs:
         sleep 120s  
         
     - name: minikube service
-      run: minikube service
-
-    - name: minikube service argocd-server -n argocd
-      run: minikube service argocd-server -n argocd
+      run: minikube service -all 
       
     - name: affiche l'url du service
       run: |
         kubectl get service
-        minikube service evershop --url -n evershop
+        minikube service evershop --url
